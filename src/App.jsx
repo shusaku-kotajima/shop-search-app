@@ -1,3 +1,4 @@
+// src/App.jsx
 import { useState } from "react";
 import "./App.css";
 import { shops } from "./data/shops";
@@ -10,7 +11,9 @@ function App() {
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const areas = Array.from(new Set(shops.map((shop) => shop.area)));
-  const categories = Array.from(new Set(shops.map((shop) => shop.category)));
+  const categories = Array.from(
+    new Set(shops.map((shop) => shop.category))
+  );
 
   const keywordLower = keyword.toLowerCase();
 
@@ -34,22 +37,29 @@ function App() {
   };
 
   return (
-    <div style={{ padding: "24px", maxWidth: "800px", margin: "0 auto" }}>
-      <h1 style={{ marginBottom: "16px" }}>お店検索アプリ（仮）</h1>
+    <div className="app">
+      <header className="app-header">
+        <h1 className="app-title">お店検索アプリ（仮）</h1>
+        <p className="app-subtitle">
+          気になるお店をキーワードやエリアでサクッと検索
+        </p>
+      </header>
 
-      <SearchForm
-        keyword={keyword}
-        selectedArea={selectedArea}
-        selectedCategory={selectedCategory}
-        areas={areas}
-        categories={categories}
-        onKeywordChange={setKeyword}
-        onAreaChange={setSelectedArea}
-        onCategoryChange={setSelectedCategory}
-        onReset={handleReset}
-      />
+      <main className="app-main">
+        <SearchForm
+          keyword={keyword}
+          selectedArea={selectedArea}
+          selectedCategory={selectedCategory}
+          areas={areas}
+          categories={categories}
+          onKeywordChange={setKeyword}
+          onAreaChange={setSelectedArea}
+          onCategoryChange={setSelectedCategory}
+          onReset={handleReset}
+        />
 
-      <ShopList shops={filteredShops} />
+        <ShopList shops={filteredShops} />
+      </main>
     </div>
   );
 }

@@ -2,36 +2,25 @@
 
 function ShopList({ shops }) {
   return (
-    <section>
-      <h2 style={{ fontSize: "18px", marginBottom: "12px" }}>
-        検索結果（{shops.length}件）
-      </h2>
+    <section className="results-section">
+      <div className="results-header">
+        <h2 className="card-title">検索結果</h2>
+        <span className="results-count">{shops.length}件</span>
+      </div>
 
       {shops.length === 0 ? (
-        <p>条件に合うお店がありませんでした。</p>
+        <p className="results-empty">条件に合うお店がありませんでした。</p>
       ) : (
-        <ul style={{ listStyle: "none", padding: 0 }}>
+        <ul className="shop-list">
           {shops.map((shop) => (
-            <li
-              key={shop.id}
-              style={{
-                border: "1px solid #ddd",
-                borderRadius: "8px",
-                padding: "12px 16px",
-                marginBottom: "12px",
-              }}
-            >
-              <h3 style={{ margin: "0 0 4px", fontSize: "16px" }}>
-                {shop.name}
-              </h3>
-              <p style={{ margin: "0 0 4px" }}>
+            <li key={shop.id} className="card shop-card">
+              <h3 className="shop-name">{shop.name}</h3>
+              <p className="shop-meta">
                 {shop.area} / {shop.category}
               </p>
-              <p style={{ margin: "0 0 4px", fontSize: "14px" }}>
-                予算目安：{shop.budget}
-              </p>
-              <p style={{ margin: 0, fontSize: "13px", color: "#555" }}>
-                タグ：{shop.tags.join("、")}
+              <p className="shop-budget">予算目安：{shop.budget}</p>
+              <p className="shop-tags">
+                タグ：<span>{shop.tags.join("、")}</span>
               </p>
             </li>
           ))}

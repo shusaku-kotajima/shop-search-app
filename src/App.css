@@ -1,42 +1,227 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* 全体リセット系（必要に応じて調整） */
+:root {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #1f2933;
+  background-color: #f3f4f6;
+}
+
+body {
+  margin: 0;
+}
+
+/* アプリ全体 */
+.app {
+  min-height: 100vh;
+  padding: 24px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-main {
+  width: 100%;
+  max-width: 880px;
+}
+
+/* ヘッダー */
+.app-header {
   text-align: center;
+  margin-bottom: 24px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app-title {
+  font-size: 32px;
+  margin: 0 0 8px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app-subtitle {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
+/* カード共通 */
 .card {
-  padding: 2em;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  border: 1px solid #e5e7eb;
 }
 
-.read-the-docs {
-  color: #888;
+.card + .card {
+  margin-top: 12px;
+}
+
+.card-title {
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+/* 検索フォーム */
+.search-card {
+  margin-bottom: 24px;
+}
+
+.form-row {
+  margin-bottom: 12px;
+}
+
+.form-row-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.form-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #374151;
+  flex: 1;
+  min-width: 140px;
+}
+
+.input {
+  margin-top: 4px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.16s ease, box-shadow 0.16s ease,
+    background-color 0.16s ease;
+  background-color: #f9fafb;
+}
+
+.input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+  background-color: #ffffff;
+}
+
+.text-input {
+  max-width: 420px;
+}
+
+.select-input {
+  max-width: 200px;
+}
+
+.form-actions {
+  margin-top: 4px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ボタン */
+.button {
+  border-radius: 999px;
+  padding: 6px 16px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+}
+
+.button-secondary {
+  background-color: #e5e7eb;
+  color: #111827;
+}
+
+.button-secondary:hover {
+  background-color: #d1d5db;
+}
+
+.button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+  opacity: 0.9;
+}
+
+/* 検索結果 */
+.results-section {
+  margin-bottom: 16px;
+}
+
+.results-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.results-count {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.results-empty {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* 店舗カード */
+.shop-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shop-card {
+  margin-bottom: 12px;
+}
+
+.shop-name {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+
+.shop-meta {
+  margin: 0 0 4px;
+  font-size: 14px;
+  color: #4b5563;
+}
+
+.shop-budget {
+  margin: 0 0 4px;
+  font-size: 14px;
+}
+
+.shop-tags {
+  margin: 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.shop-tags span {
+  font-weight: 500;
+}
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+  .app {
+    padding: 16px 12px 28px;
+  }
+
+  .app-title {
+    font-size: 24px;
+  }
+
+  .card {
+    padding: 14px 14px;
+  }
+
+  .form-row-inline {
+    flex-direction: column;
+  }
+
+  .text-input {
+    max-width: 100%;
+  }
+
+  .select-input {
+    max-width: 100%;
+  }
 }

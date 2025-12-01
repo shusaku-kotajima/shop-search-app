@@ -12,41 +12,29 @@ function SearchForm({
   onReset,
 }) {
   return (
-    <section
-      style={{
-        padding: "16px",
-        border: "1px solid #ddd",
-        borderRadius: "8px",
-        marginBottom: "24px",
-      }}
-    >
-      <h2 style={{ fontSize: "18px", marginBottom: "12px" }}>検索条件</h2>
+    <section className="card search-card">
+      <h2 className="card-title">検索条件</h2>
 
-      <div style={{ marginBottom: "12px" }}>
-        <label>
-          キーワード（店名・タグ）：
+      <div className="form-row">
+        <label className="form-label">
+          キーワード（店名・タグ）
           <input
             type="text"
             value={keyword}
             onChange={(e) => onKeywordChange(e.target.value)}
             placeholder="例：ラーメン / カフェ / 個室"
-            style={{
-              marginLeft: "8px",
-              padding: "4px 8px",
-              width: "60%",
-              maxWidth: "320px",
-            }}
+            className="input text-input"
           />
         </label>
       </div>
 
-      <div style={{ marginBottom: "12px" }}>
-        <label>
-          エリア：
+      <div className="form-row form-row-inline">
+        <label className="form-label">
+          エリア
           <select
             value={selectedArea}
             onChange={(e) => onAreaChange(e.target.value)}
-            style={{ marginLeft: "8px", padding: "4px 8px" }}
+            className="input select-input"
           >
             <option value="">すべて</option>
             {areas.map((area) => (
@@ -56,15 +44,13 @@ function SearchForm({
             ))}
           </select>
         </label>
-      </div>
 
-      <div style={{ marginBottom: "12px" }}>
-        <label>
-          カテゴリ：
+        <label className="form-label">
+          カテゴリ
           <select
             value={selectedCategory}
             onChange={(e) => onCategoryChange(e.target.value)}
-            style={{ marginLeft: "8px", padding: "4px 8px" }}
+            className="input select-input"
           >
             <option value="">すべて</option>
             {categories.map((category) => (
@@ -76,13 +62,15 @@ function SearchForm({
         </label>
       </div>
 
-      <button
-        type="button"
-        onClick={onReset}
-        style={{ marginTop: "4px", padding: "4px 12px", cursor: "pointer" }}
-      >
-        条件をリセット
-      </button>
+      <div className="form-actions">
+        <button
+          type="button"
+          onClick={onReset}
+          className="button button-secondary"
+        >
+          条件をリセット
+        </button>
+      </div>
     </section>
   );
 }
