@@ -1,4 +1,3 @@
-// src/App.jsx
 import { useState } from "react";
 import "./App.css";
 import { shops } from "./data/shops";
@@ -9,11 +8,10 @@ function App() {
   const [keyword, setKeyword] = useState("");
   const [selectedArea, setSelectedArea] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedShop, setSelectedShop] = useState(null); // ★ モーダル用
 
   const areas = Array.from(new Set(shops.map((shop) => shop.area)));
-  const categories = Array.from(
-    new Set(shops.map((shop) => shop.category))
-  );
+  const categories = Array.from(new Set(shops.map((shop) => shop.category)));
 
   const keywordLower = keyword.toLowerCase();
 
@@ -35,6 +33,8 @@ function App() {
     setSelectedArea("");
     setSelectedCategory("");
   };
+
+  const handleCloseModal = () => setSelectedShop(null);
 
   return (
     <div className="app">
@@ -58,8 +58,47 @@ function App() {
           onReset={handleReset}
         />
 
-        <ShopList shops={filteredShops} />
+        <ShopList
+          shops={filteredShops}
+          onSelectShop={setSelectedShop}
+        />
       </main>
+
+      {/* モーダル：お店が選択されているときだけ表示 */}
+      {selectedShop && (
+        <div className="modal-backdrop" onClick={handleCloseModal}>
+          <div
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              className="modal-close"
+              onClick={handleCloseModal}
+            >
+              ×
+            </button>
+
+            <h2 className="modal-title">{selectedShop.name}</h2>
+            <p className="modal-sub">
+              {selectedShop.address}
+              <br />
+              徒歩約 {selectedShop.walkMinutes} 分 ／ L.O. {selectedShop.lastOrder}
+            </p>
+
+            <div className="modal-map-wrapper">
+              <iframe
+                src={selectedShop.mapEmbedSrc}
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                className="modal-map-iframe"
+                title={`${selectedShop.name} の地図`}
+              ></iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
