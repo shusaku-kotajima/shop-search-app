@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node -v)",
+      "PowerShell(cmd /c \"cd C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\frontend && npm install\")",
+      "PowerShell(cmd /c \"mkdir C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\backend && cd C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\backend && npm init -y\")",
+      "PowerShell(cmd /c \"cd C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\backend && npm install express cors dotenv\")",
+      "PowerShell(Get-ChildItem -Recurse -Path \"C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\" | Where-Object { $_.FullName -notmatch \"node_modules\" } | Select-Object FullName | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\\", \"\"\\) })",
+      "PowerShell(Get-ChildItem -Recurse -Path \"C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\shop-search-app-main\" | Where-Object { -not $_.PSIsContainer } | Select-Object FullName)",
+      "PowerShell(Get-ChildItem -Recurse -Path \"C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\shop-search-app-main\" | Where-Object { -not $_.PSIsContainer } | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\shop-search-app-main\\\\\", \"\"\\) })",
+      "PowerShell(Get-ChildItem -Recurse -Path \"C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\frontend\" | Where-Object { -not $_.PSIsContainer -and $_.FullName -notmatch \"node_modules\" } | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\Users\\\\kotajima.shusaku\\\\AllProjects\\\\shopsearch\\\\frontend\\\\\", \"\"\\) })"
+    ]
+  }
+}
