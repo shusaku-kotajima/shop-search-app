@@ -7,6 +7,7 @@ function SearchForm({
   areas,
   categories,
   onKeywordChange,
+  onKeywordCommit,
   onAreaChange,
   onCategoryChange,
   onReset,
@@ -22,6 +23,8 @@ function SearchForm({
             type="text"
             value={keyword}
             onChange={(e) => onKeywordChange(e.target.value)}
+            onBlur={onKeywordCommit}
+            onKeyDown={(e) => e.key === "Enter" && onKeywordCommit()}
             placeholder="例：ラーメン / カフェ / 個室"
             className="input text-input"
           />

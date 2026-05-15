@@ -8,7 +8,8 @@ import ShopList from "./ShopList";
 export default function SearchPage() {
   const {
     keyword,
-    setKeyword,
+    handleKeywordChange,
+    handleKeywordCommit,
     selectedArea,
     setSelectedArea,
     selectedCategory,
@@ -16,8 +17,18 @@ export default function SearchPage() {
     areas,
     categories,
     filteredShops,
+    loading, // ← 追加
+    error,
     handleReset,
   } = useShopSearch();
+
+  if (loading) {
+    return <div className="app">読み込み中...</div>;
+  }
+
+  if (error) {
+    return <div className="app">エラー：{error}</div>;
+  }
 
   return (
     <div className="app">
@@ -35,7 +46,8 @@ export default function SearchPage() {
           selectedCategory={selectedCategory}
           areas={areas}
           categories={categories}
-          onKeywordChange={setKeyword}
+          onKeywordChange={handleKeywordChange}
+          onKeywordCommit={handleKeywordCommit}
           onAreaChange={setSelectedArea}
           onCategoryChange={setSelectedCategory}
           onReset={handleReset}

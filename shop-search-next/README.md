@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# お店検索アプリ
 
-## Getting Started
+気になるお店をキーワード・エリア・カテゴリでサクッと検索できるWebアプリです。
 
-First, run the development server:
+🔗 **[デモを見る](https://shop-search-next-11wv.vercel.app)**
+
+---
+
+## 使用技術
+
+- **Next.js 16** (App Router)
+- **React 19**
+- **Vercel**（デプロイ）
+
+---
+
+## 機能
+
+- キーワード・エリア・カテゴリでの絞り込み検索
+- 店舗詳細ページ（動的ルーティング `/shops/[id]`）
+- 検索条件をURLに同期（検索結果をURLで共有可能）
+
+---
+
+## 工夫した点
+
+### API Routesによるデータ取得
+Next.jsのAPI Routesで `/api/shops` エンドポイントを作成し、`fetch` / `async/await` で店舗データを取得しています。ローディング状態も管理しています。
+
+### カスタムフックによるロジック分離
+検索・フィルタリングのロジックを `useShopSearch` カスタムフックに切り出し、コンポーネントの責務を表示に限定しました。
+
+### URLと検索条件の同期
+`useSearchParams` / `useRouter` を使い、検索条件をURLクエリパラメータに反映。ブラウザの戻る/進むボタンや、URLの共有が可能です。
+
+### Server / Client Componentの使い分け
+Next.js App Routerの設計に沿い、`useState` や `useSearchParams` を使うコンポーネントには `"use client"` を明示しました。
+
+---
+
+## セットアップ
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[http://localhost:3000](http://localhost:3000) をブラウザで開く。

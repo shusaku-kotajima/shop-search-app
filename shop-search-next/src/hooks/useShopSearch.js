@@ -1,20 +1,43 @@
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
-import { shops } from "../data/shops";
+import { useCallback, useState, useEffect } from "react";
 
 export function useShopSearch() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // URLから現在の値を読む
-  const keyword = searchParams.get("keyword") ?? "";
+  const urlKeyword = searchParams.get("keyword") ?? "";
   const selectedArea = searchParams.get("area") ?? "";
   const selectedCategory = searchParams.get("category") ?? "";
+
+  const [keyword, setKeyword] = useState(urlKeyword);
+  const [shops, setShops] = useState([]);      // ← 店舗データをstateで管理
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // ← 追加
+
+  // APIから店舗データを取得
+  useEffect(() => {
+    const fetchShops = async () => {
+      try {
+        const res = await fetch("/api/shops");
+        if (!res.ok) throw new Error("データの取得に失敗しました");
+        const data = await res.json();
+        setShops(data);
+      } catch (e) {
+        setError(e.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchShops();
+  }, []);
+
+  useEffect(() => {
+    setKeyword(urlKeyword);
+  }, [urlKeyword]);
 
   const areas = Array.from(new Set(shops.map((shop) => shop.area)));
   const categories = Array.from(new Set(shops.map((shop) => shop.category)));
 
-  // URLを更新する関数
   const updateURL = useCallback((key, value) => {
     const params = new URLSearchParams(searchParams.toString());
     if (value === "") {
@@ -25,7 +48,8 @@ export function useShopSearch() {
     router.replace(`?${params.toString()}`);
   }, [router, searchParams]);
 
-  const setKeyword = (value) => updateURL("keyword", value);
+  const handleKeywordChange = (value) => setKeyword(value);
+  const handleKeywordCommit = () => updateURL("keyword", keyword);
   const setSelectedArea = (value) => updateURL("area", value);
   const setSelectedCategory = (value) => updateURL("category", value);
 
@@ -42,12 +66,14 @@ export function useShopSearch() {
   });
 
   const handleReset = () => {
+    setKeyword("");
     router.replace("/");
   };
 
   return {
     keyword,
-    setKeyword,
+    handleKeywordChange,
+    handleKeywordCommit,
     selectedArea,
     setSelectedArea,
     selectedCategory,
@@ -55,6 +81,8 @@ export function useShopSearch() {
     areas,
     categories,
     filteredShops,
+    loading, // ← ローディング状態も返す
+    error,
     handleReset,
   };
 }
