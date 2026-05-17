@@ -1,6 +1,9 @@
 // src/components/ShopList.jsx
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
 function ShopList({ shops, onSelectShop }) {
+  const router = useRouter();
   return (
     <section className="results-section">
       <div className="results-header">
@@ -13,11 +16,12 @@ function ShopList({ shops, onSelectShop }) {
       ) : (
         <ul className="shop-list">
           {shops.map((shop) => (
-            <li
-              key={shop.id}
-              className="card shop-card shop-card-clickable"
-
-            >
+              <li
+                key={shop.id}
+                className="card shop-card shop-card-clickable"
+                onClick={() => router.push(`/shops/${shop.id}`)}
+                style={{ cursor: "pointer" }}
+              >
               <div className="shop-card-inner">
                 {/* 左側：テキスト情報 */}
                 <div className="shop-info">
@@ -28,12 +32,12 @@ function ShopList({ shops, onSelectShop }) {
 
                   <p className="shop-highlight">
                     <span className="shop-highlight-label">目玉：</span>
-                    {shop.highlightName}（{shop.highlightGenre}）
+                    {shop.highlightName}{shop.highlightGenre ? `（${shop.highlightGenre}）` : ""}
                   </p>
 
-                  <p className="shop-meta">
-                    {shop.area} / {shop.category}
-                  </p>
+                <p className="shop-meta">
+                  {[shop.area, shop.category].filter(Boolean).join(" / ")}
+                </p>
 
                   <p className="shop-budget">予算：{shop.budget}</p>
 
@@ -44,7 +48,7 @@ function ShopList({ shops, onSelectShop }) {
                   <p className="shop-address">住所：{shop.address}</p>
 
                   <p className="shop-tags">
-                    タグ：<span>{shop.tags.join("、")}</span>
+                    タグ：<span>{Array.isArray(shop.tags) ? shop.tags.join("、") : shop.tags}</span>
                   </p>
 
                   <Link href={`/shops/${shop.id}`} className="button button-link">
@@ -55,7 +59,7 @@ function ShopList({ shops, onSelectShop }) {
                 {/* 右側：サムネ画像 */}
                 <div className="shop-thumbnail-area">
                   <img
-                    src={shop.thumbnailUrl}
+                    src={shop.thumbnailUrl?.url}
                     alt={shop.highlightName}
                     className="shop-thumbnail"
                   />

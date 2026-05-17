@@ -1,19 +1,34 @@
-/* 全体リセット系（必要に応じて調整） */
+/* ===== GAMING THEME ===== */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap');
+
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: #1f2933;
-  background-color: #f3f4f6;
+  --bg-dark: #050a14;
+  --bg-card: #0d1526;
+  --bg-card2: #0a1020;
+  --accent: #00e5ff;
+  --accent2: #ff00aa;
+  --accent3: #7b2fff;
+  --text: #e0eaff;
+  --text-muted: #6b7fa8;
+  --border: rgba(0, 229, 255, 0.2);
+  --glow: 0 0 12px rgba(0, 229, 255, 0.4);
+  --glow-strong: 0 0 24px rgba(0, 229, 255, 0.6);
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--text);
+  background-color: var(--bg-dark);
 }
 
 body {
-  margin: 0;
+  background-color: var(--bg-dark);
+  background-image:
+    radial-gradient(ellipse at 20% 20%, rgba(123, 47, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(0, 229, 255, 0.08) 0%, transparent 50%);
 }
 
-/* アプリ全体 */
+/* ===== アプリ全体 ===== */
 .app {
   min-height: 100vh;
-  padding: 24px 16px 40px;
+  padding: 32px 16px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,33 +36,53 @@ body {
 
 .app-main {
   width: 100%;
-  max-width: 880px;
+  max-width: 900px;
 }
 
-/* ヘッダー */
+/* ===== ヘッダー ===== */
 .app-header {
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 36px;
 }
 
 .app-title {
-  font-size: 32px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 36px;
+  font-weight: 900;
   margin: 0 0 8px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: none;
+  letter-spacing: 2px;
+  filter: drop-shadow(0 0 16px rgba(0, 229, 255, 0.5));
 }
 
 .app-subtitle {
   margin: 0;
   font-size: 14px;
-  color: #6b7280;
+  color: var(--text-muted);
+  letter-spacing: 1px;
 }
 
-/* カード共通 */
+/* ===== カード共通 ===== */
 .card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  padding: 18px 20px;
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
-  border: 1px solid #e5e7eb;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+  padding: 20px 24px;
+  border: 1px solid var(--border);
+  box-shadow: var(--glow), inset 0 1px 0 rgba(0, 229, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent3), var(--accent), var(--accent2));
 }
 
 .card + .card {
@@ -55,92 +90,110 @@ body {
 }
 
 .card-title {
-  font-size: 18px;
-  margin: 0 0 12px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin: 0 0 16px;
+  text-transform: uppercase;
 }
 
-/* 検索フォーム */
+/* ===== 検索フォーム ===== */
 .search-card {
-  margin-bottom: 24px;
+  margin-bottom: 28px;
 }
 
 .form-row {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .form-row-inline {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 16px;
 }
 
 .form-label {
   display: flex;
   flex-direction: column;
-  font-size: 14px;
-  color: #374151;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  text-transform: uppercase;
   flex: 1;
   min-width: 140px;
 }
 
 .input {
-  margin-top: 4px;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
   font-size: 14px;
+  font-family: 'Rajdhani', sans-serif;
   outline: none;
-  transition: border-color 0.16s ease, box-shadow 0.16s ease,
-    background-color 0.16s ease;
-  background-color: #f9fafb;
+  background-color: var(--bg-card2);
+  color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input::placeholder {
+  color: var(--text-muted);
 }
 
 .input:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
-  background-color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: var(--glow);
 }
 
-.text-input {
-  max-width: 420px;
-}
+.text-input { max-width: 480px; }
+.select-input { max-width: 220px; }
 
-.select-input {
-  max-width: 200px;
+/* selectのスタイル */
+select.input option {
+  background-color: var(--bg-card);
+  color: var(--text);
 }
 
 .form-actions {
-  margin-top: 4px;
+  margin-top: 8px;
   display: flex;
   justify-content: flex-end;
 }
 
-/* ボタン */
+/* ===== ボタン ===== */
 .button {
-  border-radius: 999px;
-  padding: 6px 16px;
-  border: none;
-  font-size: 14px;
+  border-radius: 4px;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  font-size: 12px;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.1s ease, opacity 0.1s ease;
+  transition: all 0.2s;
 }
 
 .button-secondary {
-  background-color: #e5e7eb;
-  color: #111827;
+  background-color: transparent;
+  color: var(--text-muted);
+  border-color: var(--text-muted);
 }
 
 .button-secondary:hover {
-  background-color: #d1d5db;
+  color: var(--accent);
+  border-color: var(--accent);
+  box-shadow: var(--glow);
 }
 
 .button:active {
   transform: translateY(1px);
-  box-shadow: none;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
-/* 検索結果 */
+/* ===== 検索結果 ===== */
 .results-section {
   margin-bottom: 16px;
 }
@@ -149,20 +202,33 @@ body {
   display: flex;
   align-items: baseline;
   gap: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.results-header h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin: 0;
 }
 
 .results-count {
-  font-size: 13px;
-  color: #6b7280;
+  font-size: 12px;
+  color: var(--accent2);
+  font-weight: 600;
 }
 
 .results-empty {
   font-size: 14px;
-  color: #6b7280;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 40px 0;
 }
 
-/* 店舗カード */
+/* ===== 店舗カード ===== */
 .shop-list {
   list-style: none;
   padding: 0;
@@ -170,88 +236,29 @@ body {
 }
 
 .shop-card {
-  margin-bottom: 12px;
-}
-
-.shop-name {
-  margin: 0 0 4px;
-  font-size: 16px;
-}
-
-.shop-meta {
-  margin: 0 0 4px;
-  font-size: 14px;
-  color: #4b5563;
-}
-
-.shop-budget {
-  margin: 0 0 4px;
-  font-size: 14px;
-}
-
-.shop-tags {
-  margin: 0;
-  font-size: 13px;
-  color: #6b7280;
-}
-
-.shop-tags span {
-  font-weight: 500;
-}
-
-/* スマホ対応 */
-@media (max-width: 600px) {
-  .app {
-    padding: 16px 12px 28px;
-  }
-
-  .app-title {
-    font-size: 24px;
-  }
-
-  .card {
-    padding: 14px 14px;
-  }
-
-  .form-row-inline {
-    flex-direction: column;
-  }
-
-  .text-input {
-    max-width: 100%;
-  }
-
-  .select-input {
-    max-width: 100%;
-  }
-}
-/* ===== 店舗カードのレイアウト（追加分） ===== */
-
-.shop-card {
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .shop-card-clickable {
   cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
 }
 
 .shop-card-clickable:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
+  transform: translateY(-3px);
+  border-color: rgba(0, 229, 255, 0.5);
+  box-shadow: var(--glow-strong);
 }
 
 .shop-card-inner {
   display: flex;
-  gap: 16px;
+  gap: 20px;
 }
 
-.shop-info {
-  flex: 1;
-}
+.shop-info { flex: 1; }
 
 .shop-thumbnail-area {
-  width: 140px;
+  width: 130px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -260,28 +267,38 @@ body {
 
 .shop-thumbnail {
   width: 100%;
-  border-radius: 10px;
+  border-radius: 6px;
   object-fit: cover;
+  border: 1px solid var(--border);
 }
 
 .shop-label {
   margin: 0 0 4px;
-  font-size: 12px;
-  color: #6b7280;
+  font-size: 10px;
+  color: var(--accent);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Orbitron', sans-serif;
 }
 
 .shop-name {
-  margin: 0 0 6px;
-  font-size: 18px;
+  margin: 0 0 8px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 1px;
 }
 
 .shop-highlight {
-  margin: 0 0 4px;
+  margin: 0 0 6px;
   font-size: 14px;
+  color: var(--accent2);
 }
 
 .shop-highlight-label {
   font-weight: 600;
+  color: var(--accent2);
 }
 
 .shop-meta,
@@ -291,68 +308,95 @@ body {
 .shop-tags {
   margin: 0 0 4px;
   font-size: 13px;
-  color: #4b5563;
+  color: var(--text-muted);
+}
+
+.shop-tags span {
+  color: var(--accent);
+  font-size: 12px;
 }
 
 .button-link {
   padding: 0;
   background: none;
-  color: #2563eb;
+  color: var(--accent);
   border: none;
   font-size: 13px;
-  text-decoration: underline;
+  font-family: 'Rajdhani', sans-serif;
+  text-decoration: none;
   cursor: pointer;
+  letter-spacing: 1px;
 }
 
-/* ===== モーダル（MAP拡大表示） ===== */
+.button-link:hover {
+  color: var(--accent2);
+  text-shadow: 0 0 8px var(--accent2);
+}
 
+/* ===== モーダル ===== */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(15, 23, 42, 0.45);
+  background-color: rgba(5, 10, 20, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 50;
+  backdrop-filter: blur(4px);
 }
 
 .modal-content {
-  background-color: #ffffff;
-  border-radius: 14px;
-  padding: 18px 18px 16px;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+  padding: 20px;
   width: min(90vw, 720px);
   max-height: 90vh;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border);
+  box-shadow: var(--glow-strong);
   position: relative;
   display: flex;
   flex-direction: column;
 }
 
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent3), var(--accent), var(--accent2));
+}
+
 .modal-close {
   position: absolute;
-  top: 8px;
-  right: 10px;
+  top: 10px; right: 12px;
   border: none;
   background: transparent;
   font-size: 20px;
   cursor: pointer;
+  color: var(--text-muted);
+  transition: color 0.2s;
 }
+
+.modal-close:hover { color: var(--accent2); }
 
 .modal-title {
   margin: 4px 0 4px;
-  font-size: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  color: var(--text);
 }
 
 .modal-sub {
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   font-size: 13px;
-  color: #4b5563;
+  color: var(--text-muted);
 }
 
 .modal-map-wrapper {
   flex: 1;
-  border-radius: 10px;
+  border-radius: 6px;
   overflow: hidden;
+  border: 1px solid var(--border);
 }
 
 .modal-map-iframe {
@@ -361,17 +405,14 @@ body {
   border: 0;
 }
 
-/* スマホのときのカード縦並び＆MAP高さ調整 */
+/* ===== スマホ対応 ===== */
 @media (max-width: 600px) {
-  .shop-card-inner {
-    flex-direction: column;
-  }
-
-  .shop-thumbnail-area {
-    width: 100%;
-  }
-
-  .modal-map-iframe {
-    height: 260px;
-  }
+  .app { padding: 20px 12px 40px; }
+  .app-title { font-size: 24px; }
+  .card { padding: 14px 16px; }
+  .form-row-inline { flex-direction: column; }
+  .text-input, .select-input { max-width: 100%; }
+  .shop-card-inner { flex-direction: column; }
+  .shop-thumbnail-area { width: 100%; }
+  .modal-map-iframe { height: 260px; }
 }

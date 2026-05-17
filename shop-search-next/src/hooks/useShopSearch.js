@@ -55,10 +55,14 @@ export function useShopSearch() {
 
   const keywordLower = keyword.toLowerCase();
   const filteredShops = shops.filter((shop) => {
-    const matchKeyword =
-      keywordLower === "" ||
-      shop.name.toLowerCase().includes(keywordLower) ||
-      shop.tags.some((tag) => tag.toLowerCase().includes(keywordLower));
+  const matchKeyword =
+    keywordLower === "" ||
+    shop.name.toLowerCase().includes(keywordLower) ||
+    (shop.highlightName || "").toLowerCase().includes(keywordLower) ||
+    (shop.highlightGenre || "").toLowerCase().includes(keywordLower) ||
+    (Array.isArray(shop.tags)
+      ? shop.tags.some((tag) => tag.toLowerCase().includes(keywordLower))
+      : (shop.tags || "").toLowerCase().includes(keywordLower));
     const matchArea = selectedArea === "" || shop.area === selectedArea;
     const matchCategory =
       selectedCategory === "" || shop.category === selectedCategory;

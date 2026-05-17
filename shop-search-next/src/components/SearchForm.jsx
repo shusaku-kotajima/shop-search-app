@@ -41,7 +41,7 @@ function SearchForm({
           >
             <option value="">すべて</option>
             {areas.map((area) => (
-              <option key={area} value={area}>
+              <option key={`area-${area}`} value={area}>
                 {area}
               </option>
             ))}
@@ -57,7 +57,7 @@ function SearchForm({
           >
             <option value="">すべて</option>
             {categories.map((category) => (
-              <option key={category} value={category}>
+              <option key={`category-${category}`} value={category}>
                 {category}
               </option>
             ))}
