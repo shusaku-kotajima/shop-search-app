@@ -1,5 +1,4 @@
 // src/components/ShopList.jsx
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 function ShopList({ shops, onSelectShop }) {
@@ -16,28 +15,26 @@ function ShopList({ shops, onSelectShop }) {
       ) : (
         <ul className="shop-list">
           {shops.map((shop) => (
-              <li
-                key={shop.id}
-                className="card shop-card shop-card-clickable"
-                onClick={() => router.push(`/shops/${shop.id}`)}
-                style={{ cursor: "pointer" }}
-              >
+            <li
+              key={shop.id}
+              className="card shop-card shop-card-clickable"
+              onClick={() => router.push(`/shops/${shop.id}`)}
+              style={{ cursor: "pointer" }}
+            >
               <div className="shop-card-inner">
                 {/* 左側：テキスト情報 */}
                 <div className="shop-info">
                   <p className="shop-label">お店名前</p>
-                  <h3 className="shop-name">
-                    <Link href={`/shops/${shop.id}`}>{shop.name}</Link>
-                  </h3>
+                  <h3 className="shop-name">{shop.name}</h3>
 
                   <p className="shop-highlight">
                     <span className="shop-highlight-label">目玉：</span>
                     {shop.highlightName}{shop.highlightGenre ? `（${shop.highlightGenre}）` : ""}
                   </p>
 
-                <p className="shop-meta">
-                  {[shop.area, shop.category].filter(Boolean).join(" / ")}
-                </p>
+                  <p className="shop-meta">
+                    {[shop.area, shop.category].filter(Boolean).join(" / ")}
+                  </p>
 
                   <p className="shop-budget">予算：{shop.budget}</p>
 
@@ -51,9 +48,7 @@ function ShopList({ shops, onSelectShop }) {
                     タグ：<span>{Array.isArray(shop.tags) ? shop.tags.join("、") : shop.tags}</span>
                   </p>
 
-                  <Link href={`/shops/${shop.id}`} className="button button-link">
-                    詳細を見る
-                  </Link>
+                  <span className="button button-link">詳細を見る</span>
                 </div>
 
                 {/* 右側：サムネ画像 */}
